@@ -12,6 +12,8 @@ import ru.alexsem.springcourse.services.PeopleService;
 import javax.validation.Valid;
 
 /**
+ *
+ * !!!!!НЕОБХОДИМО РЕАЛИЗОВАТЬ PERSONVALIDATOR И ВНЕДРИТЬ В ЭТОТ КЛАСС (СМ ПРОЕКТ Spring_MVCApp1
  * HTTP методы и URL для паттерна REST указаны в CRUD_App1
  * <p>
  * Использование валидации personValidator см в проекте Spring_MVCApp1

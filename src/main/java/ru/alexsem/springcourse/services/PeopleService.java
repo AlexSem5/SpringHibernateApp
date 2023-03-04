@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.alexsem.springcourse.models.Person;
 import ru.alexsem.springcourse.repositories.PeopleRepository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,6 +42,7 @@ public class PeopleService {
     
     @Transactional
     public void save(Person person) {
+        person.setCreatedAt(new Date());
         peopleRepository.save(person);
     }
     
