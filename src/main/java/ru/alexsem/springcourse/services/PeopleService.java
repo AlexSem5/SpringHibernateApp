@@ -10,8 +10,13 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Любая работа с данными осуществляется в сервисном слое
+ * Любая работа с данными осуществляется в сервисном слое.
+ * В сервисе должна быть бизнес-логика(здесь её нет). Например,
+ * вызываются методы из разных репозиториев (внедрены несколько репозиториев)
+ * и данные обрабатываются.
+ * (транзакции создаются в сервисе)
  */
+
 
 @Service
 //Берёт на себя работу с транзакциями:
@@ -49,5 +54,9 @@ public class PeopleService {
     @Transactional
     public void delete(int id) {
         peopleRepository.deleteById(id);
+    }
+    
+    public void test() {
+        System.out.println("Testing here with debug. Inside Hibernate Transaction");
     }
 }

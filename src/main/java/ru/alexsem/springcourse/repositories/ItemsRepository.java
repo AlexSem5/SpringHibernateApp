@@ -2,23 +2,21 @@ package ru.alexsem.springcourse.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import ru.alexsem.springcourse.models.Item;
 import ru.alexsem.springcourse.models.Person;
+
+import java.util.List;
 /**
  * Репозиторий - для стандартных операций с данными (CRUD, например) -
  * он более высокоуровневый. Работает с сущностями.
  * DAO - для более сложных манипуляций с данными и БД, где нужно
  * вручную писать SQL/HQL, нестандартные запросы.
  */
-import java.util.List;
-
 @Repository
-public interface PeopleRepository extends JpaRepository<Person, Integer> {
+public interface ItemsRepository extends JpaRepository<Item, Integer> {
     //    Создаём кастомные запросы:
-    List<Person> findByName(String name);
+    List<Item> findByItemName(String itemName);
     
-    List<Person> findByNameOrderByAge(String name);
-    
-    List<Person> findByEmail(String email);
-    
-    List<Person> findByNameStartingWith(String startingWith);
+    //person.getItems()
+    List<Item> findByOwner(Person owner);
 }

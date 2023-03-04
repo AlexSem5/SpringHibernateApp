@@ -10,6 +10,14 @@ import ru.alexsem.springcourse.models.Person;
 
 import java.util.List;
 
+/**
+ * Используем Hibernate
+ *
+ * Репозиторий - для стандартных операций с данными (CRUD, например) -
+ * он более высокоуровневый. Работает с сущностями.
+ * DAO - для более сложных манипуляций с данными и БД, где нужно
+ * вручную писать SQL/HQL, нестандартные запросы.
+ */
 @Component
 public class PersonDAO {
     

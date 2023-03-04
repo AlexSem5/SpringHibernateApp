@@ -1,10 +1,13 @@
 package ru.alexsem.springcourse.models;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 //Hibernate отслеживает эту сущность Entity
 @Entity
@@ -27,6 +30,11 @@ public class Person {
     @Email(message = "Email should be valid")
     @Column(name = "email")
     private String email;
+    
+    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
+//    Если сохраняем человека, то автоматически сохраняется связанная сущность:
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    private List<Item> items;
     
     public Person() {
     }

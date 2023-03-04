@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.alexsem.springcourse.models.Person;
+import ru.alexsem.springcourse.services.ItemsService;
 import ru.alexsem.springcourse.services.PeopleService;
 
 import javax.validation.Valid;
@@ -14,16 +15,20 @@ import javax.validation.Valid;
  * HTTP методы и URL для паттерна REST указаны в CRUD_App1
  * <p>
  * Использование валидации personValidator см в проекте Spring_MVCApp1
+ * В контроллере должно быть минимум кода.
+ * Можем подгружать разные сервисы.
  */
 @Controller
 @RequestMapping("/people")
 public class PeopleController {
     
     private final PeopleService peopleService;
+    private final ItemsService itemsService;
     
     @Autowired
-    public PeopleController(PeopleService peopleService) {
+    public PeopleController(PeopleService peopleService, ItemsService itemsService) {
         this.peopleService = peopleService;
+        this.itemsService = itemsService;
     }
 //    private final PersonDAO personDAO;
 //
@@ -45,6 +50,12 @@ public class PeopleController {
         //  Получим всех людей из DAO и передадим на отображение в представление
 //        List<Person> people = personDAO.index();
         model.addAttribute("people", peopleService.findAll());
+        
+//        Эти методы для примера работы с debug:
+        itemsService.findByItemName("Airpods");
+        itemsService.findByOwner(peopleService.findAll().get(0));
+        peopleService.test();
+        
         return "people/index";
     }
     
