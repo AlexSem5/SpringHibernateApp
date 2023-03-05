@@ -10,8 +10,22 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 //Hibernate отслеживает эту сущность Entity
+/**
+ * Аннотацией @Entity помечаем класс, который связан с бд.
+ * Класс с @Entity должен иметь пустой конструктор и поле с аннотацией @Id
+ *
+ * Сущесвуют определённые требования к классам. Вот самые главные из них:
+ *
+ * Все классы должны иметь ID для простой идентификации наших объектов в БД и в Hibernate.
+ * Это поле класса соединяется с первичным ключём (primary key) таблицы БД.
+ * Все POJO – классы должны иметь конструктор по умолчанию (пустой).
+ * Все поля  – классов должны иметь модификатор доступа private,
+ * иметь набор getter-ов и setter-ов в стиле JavaBean.
+ *  классы не должны содержать бизнес-логику.
+ */
 @Entity
 @Table(name = "Person")
 public class Person {
@@ -46,6 +60,8 @@ public class Person {
     @Column(name = "created_at")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
+    @Enumerated(EnumType.STRING)
+    private Mood mood;
     
     public Date getDateOfBirth() {
         return dateOfBirth;
@@ -53,6 +69,22 @@ public class Person {
     
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+    
+    public List<Item> getItems() {
+        return items;
+    }
+    
+    public void setItems(List<Item> items) {
+        this.items = items;
+    }
+    
+    public Mood getMood() {
+        return mood;
+    }
+    
+    public void setMood(Mood mood) {
+        this.mood = mood;
     }
     
     public Date getCreatedAt() {
@@ -110,5 +142,22 @@ public class Person {
                ", name='" + name + '\'' +
                ", age=" + age +
                '}';
+    }
+    
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Person person = (Person) o;
+        return age == person.age && Objects.equals(name, person.name);
+    }
+    
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, age);
     }
 }

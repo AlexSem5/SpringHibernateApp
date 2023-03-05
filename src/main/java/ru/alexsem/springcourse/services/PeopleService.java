@@ -3,6 +3,8 @@ package ru.alexsem.springcourse.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.alexsem.springcourse.dao.ProblemNPlus1DAO;
+import ru.alexsem.springcourse.models.Mood;
 import ru.alexsem.springcourse.models.Person;
 import ru.alexsem.springcourse.repositories.PeopleRepository;
 
@@ -25,13 +27,16 @@ import java.util.Optional;
 public class PeopleService {
     
     private final PeopleRepository peopleRepository;
+    private final ProblemNPlus1DAO problemNPlus1DAO;
     
     @Autowired
-    public PeopleService(PeopleRepository peopleRepository) {
+    public PeopleService(PeopleRepository peopleRepository, ProblemNPlus1DAO problemNPlus1DAO) {
         this.peopleRepository = peopleRepository;
+        this.problemNPlus1DAO = problemNPlus1DAO;
     }
     
     public List<Person> findAll() {
+        problemNPlus1DAO.testNPlus1();
         return peopleRepository.findAll();
     }
     
@@ -43,6 +48,7 @@ public class PeopleService {
     @Transactional
     public void save(Person person) {
         person.setCreatedAt(new Date());
+        person.setMood(Mood.CALM);
         peopleRepository.save(person);
     }
     

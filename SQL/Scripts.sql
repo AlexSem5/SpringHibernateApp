@@ -29,4 +29,11 @@ ALTER TABLE person
 -- Точное время
 -- Значения timestamp сохраняются в секундах до или после полуночи 1 января 2000 г.
 ALTER TABLE person
-    ADD COLUMN created_at TIMESTAMP
+    ADD COLUMN created_at TIMESTAMP;
+
+ALTER TABLE person
+    ADD COLUMN mood INT;
+-- так как выбрали Ordinal
+
+ALTER TABLE person DROP COLUMN mood;
+ALTER TABLE person ADD COLUMN mood varchar;

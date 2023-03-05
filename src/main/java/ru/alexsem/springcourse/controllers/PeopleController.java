@@ -54,9 +54,9 @@ public class PeopleController {
         model.addAttribute("people", peopleService.findAll());
         
 //        Эти методы для примера работы с debug:
-        itemsService.findByItemName("Airpods");
-        itemsService.findByOwner(peopleService.findAll().get(0));
-        peopleService.test();
+//        itemsService.findByItemName("Airpods");
+//        itemsService.findByOwner(peopleService.findAll().get(0));
+//        peopleService.test();
         
         return "people/index";
     }
