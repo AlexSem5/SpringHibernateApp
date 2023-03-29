@@ -37,6 +37,7 @@ public class SpringConfig implements WebMvcConfigurer {
     
     private final ApplicationContext applicationContext;
     
+//    С помощью данного объекта получим данные из hibernate.properties
     private final Environment env;
     
     @Autowired
@@ -85,11 +86,13 @@ public class SpringConfig implements WebMvcConfigurer {
     }
     
     // Используем Hibernate вместо JdbcTemplate
+//    В сложных приложениях используется JdbcTemplate для кастомных запросов
 //    @Bean
 //    public JdbcTemplate jdbcTemplate() {
 //        return new JdbcTemplate(dataSource());
 //    }
     
+//    Не создаём bean из него. Просто возвращает объект Properties
     private Properties hibernateProperties() {
         Properties properties = new Properties();
         properties.put("hibernate.dialect", env.getRequiredProperty("hibernate.dialect"));
@@ -112,7 +115,7 @@ public class SpringConfig implements WebMvcConfigurer {
 //    }
 
 
-//    Соответствует спецификации JPA:
+//    Соответствует спецификации JPA (работает как sessionFactory):
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         final LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();

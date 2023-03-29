@@ -17,6 +17,12 @@ import java.util.Set;
  */
 @Component
 public class ProblemNPlus1DAO {
+    /**
+     * Меняем sessionFactory на EntityManagerFactory
+     * так как мы работаем с JPA-репозиторием
+     * entityManager object manages a context consisting of entities.
+     * context manages entity lifecycle (Transaction-Scoped Persistence Context).
+     */
     private final EntityManager entityManager;
     @Autowired
     public ProblemNPlus1DAO(EntityManager entityManager) {
@@ -25,7 +31,6 @@ public class ProblemNPlus1DAO {
     @Transactional(readOnly = true)
     public void testNPlus1() {
         Session session = entityManager.unwrap(Session.class);
-        
 //        1 запрос
 //        List<Person> people = session.createQuery(
 //                "select p from Person p", Person.class).getResultList();
@@ -33,8 +38,15 @@ public class ProblemNPlus1DAO {
 //        people.forEach(person -> System.out.println(person.getName() + " " + person.getItems()));
 
 //        Solution.SQL LEFT JOIN -> результирующая объединённая таблица:
+//        Для работы HashSet необходимо реализовать Hashcode и Equals:
         Set<Person> people = new HashSet<>(session.createQuery("select p from Person p left join fetch p.items").getResultList()) ;
         people.forEach(person -> System.out.println(person.getName() + " " + person.getItems()));
+    
+        //HQL example
+        // We refer to object Item, not to the table. i.owner is a property, not a table column
+//            List<Item> items = session.createQuery("select i from Item i where i.owner.id=:personId", Item.class)
+//                                         .setParameter("personId", personOneToMany.getId())
+//                                         .getResultList();
         
     }
 }

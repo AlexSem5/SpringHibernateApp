@@ -17,6 +17,7 @@ import java.util.Optional;
  * В сервисе должна быть бизнес-логика(здесь её нет). Например,
  * вызываются методы из разных репозиториев (внедрены несколько репозиториев)
  * и данные обрабатываются.
+ * В сервисе можно внедрять и DAO, и репозитории.
  * (транзакции создаются в сервисе)
  */
 
@@ -51,6 +52,13 @@ public class PeopleService {
         person.setMood(Mood.CALM);
         peopleRepository.save(person);
     }
+    
+    /**
+     * В репозитории есть соглашение, что для добавления
+     * и обновления сущности используется один и тот же метод save(person)
+     * @param id
+     * @param updatedPerson
+     */
     
     @Transactional
     public void update(int id, Person updatedPerson) {

@@ -32,12 +32,6 @@ public class PeopleController {
         this.peopleService = peopleService;
         this.itemsService = itemsService;
     }
-//    private final PersonDAO personDAO;
-//
-//    @Autowired
-//    public PeopleController(PersonDAO personDAO) {
-//        this.personDAO = personDAO;
-//    }
     
     /**
      * Получаем все записи с сервера(DB->DAO->Controller->View)
@@ -49,8 +43,6 @@ public class PeopleController {
      */
     @GetMapping()
     public String index(Model model) {
-        //  Получим всех людей из DAO и передадим на отображение в представление
-//        List<Person> people = personDAO.index();
         model.addAttribute("people", peopleService.findAll());
         
 //        Эти методы для примера работы с debug:

@@ -20,7 +20,9 @@ import java.util.List;
  */
 @Component
 public class PersonDAO {
-    
+    /**
+     * Меняем sessionFactory на EntityManagerFactory (см ProblemNPlus1DAO)
+     */
     private final SessionFactory sessionFactory;
     
     @Autowired
@@ -28,9 +30,12 @@ public class PersonDAO {
         this.sessionFactory = sessionFactory;
     }
     
-    //    Аннотация сама открывает и закрывает (commit) транзакцию
+    //    Аннотация сама открывает и закрывает (commit -> session.close) транзакцию
     @Transactional(readOnly = true)
     public List<Person> index() {
+
+//    Сессия для работы с Hibernate
+        
         Session session = sessionFactory.getCurrentSession();
         List<Person> people = session.createQuery("select p from Person p", Person.class)
                 .getResultList();

@@ -11,6 +11,9 @@ import ru.alexsem.springcourse.models.Person;
  */
 import java.util.List;
 
+/**
+ * Указываем класс Person и тип id (Integer)
+ */
 @Repository
 public interface PeopleRepository extends JpaRepository<Person, Integer> {
     //    Создаём кастомные запросы:

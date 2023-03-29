@@ -63,6 +63,14 @@ public class Person {
     @Enumerated(EnumType.STRING)
     private Mood mood;
     
+    public Person() {
+    }
+    
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+    
     public Date getDateOfBirth() {
         return dateOfBirth;
     }
@@ -95,8 +103,7 @@ public class Person {
         this.createdAt = createdAt;
     }
     
-    public Person() {
-    }
+    
     
     public String getEmail() {
         return email;
@@ -104,11 +111,6 @@ public class Person {
     
     public void setEmail(String email) {
         this.email = email;
-    }
-    
-    public Person(String name, int age) {
-        this.name = name;
-        this.age = age;
     }
     
     public int getId() {

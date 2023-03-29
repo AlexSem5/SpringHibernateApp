@@ -26,6 +26,7 @@ public class Item {
     private String itemName;
     
     //    Эта сущность является owning side - владеющая сторона (foreign key)
+//    так как есть @JoinColumn
     @ManyToOne
     @JoinColumn(name = "person_id", referencedColumnName = "id")
     private Person owner;
